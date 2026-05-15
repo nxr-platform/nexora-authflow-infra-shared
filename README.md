@@ -1,0 +1,23 @@
+# nexora-authflow-infra-shared
+
+Global and shared infrastructure for AuthFlow.
+Provisioned once in the shared subscription using sp-global-shared credentials.
+
+## Layers
+
+| Layer | Description | State Key |
+|-------|-------------|-----------|
+| global | Front Door, ACR, DNS Zone | authflow/global/global.tfstate |
+| shared | VNet, subnets, Log Analytics | authflow/shared/shared.tfstate |
+
+## Deployment Order
+
+```
+1. global/
+2. shared/   (reads global outputs via remote state)
+```
+
+## Credentials
+
+Service Principal: nxr-authflow-sp-global-shared
+Subscription: nexora-authflow-shared

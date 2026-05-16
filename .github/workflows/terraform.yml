@@ -165,6 +165,12 @@ jobs:
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
+      - name: Configure Git for Terraform modules
+        env:
+          TOKEN: ${{ secrets.MODULES_GITHUB_TOKEN }}
+        run: |
+          git config --global url."https://${TOKEN}@github.com/".insteadOf "https://github.com/"
+
       - name: Terraform Init
         id: init
         run: |

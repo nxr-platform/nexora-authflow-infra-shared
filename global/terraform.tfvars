@@ -1,4 +1,4 @@
-location    = "uksouth"
+location = "uksouth"
 tags = {
   product     = "authflow"
   owner       = "platform-team"

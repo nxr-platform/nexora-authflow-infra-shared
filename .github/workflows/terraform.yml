@@ -52,6 +52,12 @@ jobs:
           client-id: ${{ secrets.AZURE_CLIENT_ID }}
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      
+      - name: Configure Git for Terraform modules
+        env:
+          TOKEN: ${{ secrets.MODULES_GITHUB_TOKEN }}
+        run: |
+          git config --global url."https://${TOKEN}@github.com/".insteadOf "https://github.com/"
 
       - name: Terraform Init
         id: init
@@ -61,7 +67,7 @@ jobs:
             -backend-config="storage_account_name=${{ secrets.TF_STATE_STORAGE_ACCOUNT }}" \
             -backend-config="container_name=${{ secrets.TF_STATE_CONTAINER }}" \
             -backend-config="key=authflow/global/global.tfstate" \
-            -backend-config="use_oidc=true"
+            -backend-config="use_azuread_auth=true"
 
       - name: Terraform Validate
         id: validate
@@ -159,6 +165,12 @@ jobs:
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
+      - name: Configure Git for Terraform modules
+        env:
+          TOKEN: ${{ secrets.MODULES_GITHUB_TOKEN }}
+        run: |
+          git config --global url."https://${TOKEN}@github.com/".insteadOf "https://github.com/"
+
       - name: Terraform Init
         id: init
         run: |
@@ -167,7 +179,7 @@ jobs:
             -backend-config="storage_account_name=${{ secrets.TF_STATE_STORAGE_ACCOUNT }}" \
             -backend-config="container_name=${{ secrets.TF_STATE_CONTAINER }}" \
             -backend-config="key=authflow/shared/shared.tfstate" \
-            -backend-config="use_oidc=true"
+            -backend-config="use_azuread_auth=true"
 
       - name: Terraform Validate
         id: validate

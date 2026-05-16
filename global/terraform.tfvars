@@ -1,4 +1,3 @@
-environment = "shared"
 location    = "uksouth"
 tags = {
   product     = "authflow"

@@ -3,7 +3,7 @@
 # No resource blocks directly in this file.
 
 module "resource_group" {
-  source = "git::https://github.com/nxr-platform/nexora-authflow-terraform-modules.git//modules/resource-group?ref=v0.1.0"
+  source = "git::https://github.com/nxr-platform/nexora-authflow-terraform-modules.git//modules/resource-group?ref=v0.1.1"
 
   company     = "nxr"
   domain      = "authflow"

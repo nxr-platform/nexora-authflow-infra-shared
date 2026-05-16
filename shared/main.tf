@@ -1,15 +1,9 @@
-# Shared resources — VNet, subnets, Log Analytics
-# This root configuration calls modules only.
-# No resource blocks directly in this file.
+module "resource_group" {
+  source = "git::https://github.com/nxr-platform/nexora-authflow-terraform-modules.git//modules/resource-group?ref=v0.1.2"
 
-# Example remote state reference:
-# data "terraform_remote_state" "shared" {
-#   backend = "azurerm"
-#   config = {
-#     resource_group_name  = "nxr-authflow-tfstate-rg"
-#     storage_account_name = "nxrauthflowtfstate"
-#     container_name       = "tfstate"
-#     key                  = "authflow/shared/shared.tfstate"
-#     use_oidc             = true
-#   }
-# }
+  company   = local.company
+  domain    = local.domain
+  component = "shared"
+  location  = var.location
+  tags      = local.common_tags
+}

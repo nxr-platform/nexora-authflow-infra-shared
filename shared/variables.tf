@@ -1,12 +1,12 @@
-variable "environment" {
-  description = "Deployment environment (dev, staging, prod)"
-  type        = string
-}
-
 variable "location" {
   description = "Azure region"
   type        = string
   default     = "uksouth"
+
+  validation {
+    condition     = contains(["uksouth", "ukwest", "westeurope"], var.location)
+    error_message = "location must be uksouth, ukwest, or westeurope"
+  }
 }
 
 variable "tags" {

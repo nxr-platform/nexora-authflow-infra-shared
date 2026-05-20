@@ -23,6 +23,16 @@ output "resource_group_location" {
   value       = module.resource_group.location
 }
 
+output "subnet_ids" {
+  description = "Map of subnet names to subnet IDs"
+  value       = { for k, v in azurerm_subnet.subnet : k => v.id }
+}
+
+output "subnet_address_prefixes" {
+  description = "Map of subnet names to address prefixes"
+  value       = { for k, v in azurerm_subnet.subnet : k => v.address_prefixes[0] }
+}
+
 # Outputs for Shared resources — VNet, subnets, Log Analytics
 # Expose values needed by dependent layers via terraform_remote_state
 

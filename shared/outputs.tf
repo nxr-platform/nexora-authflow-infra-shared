@@ -23,8 +23,12 @@ output "resource_group_location" {
   value       = module.resource_group.location
 }
 
-# Outputs for Shared resources — VNet, subnets, Log Analytics
-# Expose values needed by dependent layers via terraform_remote_state
+output "subnet_ids" {
+  description = "Map of subnet names to subnet IDs"
+  value       = { for k, v in module.subnets.subnet_ids : k => v.id }
+}
 
-# Outputs for Global resources — Front Door, ACR, DNS Zone
-# Expose values needed by dependent layers via terraform_remote_state
+output "subnet_address_prefixes" {
+  description = "Map of subnet names to address prefixes"
+  value       = { for k, v in module.subnets.subnet_address_prefixes : k => v.address_prefix }
+}

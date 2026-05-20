@@ -25,10 +25,10 @@ output "resource_group_location" {
 
 output "subnet_ids" {
   description = "Map of subnet names to subnet IDs"
-  value       = { for k, v in module.subnets.subnets_id : k => v.id }
+  value       = { for k, v in module.subnets.subnet_id : k => v.id }
 }
 
 output "subnet_address_prefixes" {
   description = "Map of subnet names to address prefixes"
-  value       = { for k, v in module.subnets.subnets_address_prefixes : k => v.address_prefix }
+  value       = { for k, v in module.subnets.subnet_address_prefixes : k => v.address_prefix }
 }

@@ -32,3 +32,8 @@ output "subnet_address_prefixes" {
   description = "Map of subnet names to address prefixes"
   value       = module.subnet.subnet_address_prefixes
 }
+
+output "nsg_ids" {
+  description = "Map of NSG names to NSG IDs"
+  value       = module.nsg.nsg_ids
+}

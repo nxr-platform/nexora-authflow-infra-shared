@@ -20,3 +20,11 @@ variable "vnet_address_space" {
   type        = list(string)
   default     = ["10.0.0.0/16"]
 }
+
+variable "subnets" {
+  description = "Map of subnets to create in the shared VNet"
+  type = map(object({
+    address_prefix = string
+    delegation     = optional(string)
+  }))
+}

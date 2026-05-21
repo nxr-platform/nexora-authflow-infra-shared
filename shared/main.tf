@@ -29,3 +29,13 @@ module "subnet" {
   tags                = local.common_tags
 }
 
+module "nsg" {
+  source = "git::https://github.com/nxr-platform/nexora-authflow-terraform-modules.git//modules/nsg?ref=v0.4.0"
+
+  resource_group_name = module.resource_group.name
+  location            = var.location
+  nsgs                = var.nsgs
+  tags                = local.common_tags
+}
+
+

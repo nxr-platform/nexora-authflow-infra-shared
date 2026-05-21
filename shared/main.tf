@@ -20,16 +20,12 @@ module "network" {
   tags                = local.common_tags
 }
 
-module "subnets" {
+module "subnet" {
   source = "git::https://github.com/nxr-platform/nexora-authflow-terraform-modules.git//modules/subnet?ref=v0.3.0"
 
   resource_group_name = module.resource_group.name
   vnet_name           = module.network.name
-  subnets = {
-    aks               = { address_prefix = "10.0.20.0/24", delegation = null }
-    postgresql        = { address_prefix = "10.0.30.0/28", delegation = "Microsoft.DBforPostgreSQL/flexibleServers" }
-    redis             = { address_prefix = "10.0.40.0/28", delegation = null }
-    private-endpoints = { address_prefix = "10.0.50.0/28", delegation = null }
-    app-gateway       = { address_prefix = "10.0.10.0/24", delegation = null }
-  }
+  subnets             = var.subnets
+  tags                = local.common_tags
 }
+

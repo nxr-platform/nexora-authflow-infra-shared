@@ -7,13 +7,14 @@ on:
     paths:
     - 'global/**'
     - 'shared/**'
+    - '.github/workflows/**'
   pull_request:
     branches:
       - main
     paths:
     - 'global/**'
     - 'shared/**'
-
+    - '.github/workflows/**'
 permissions:
   id-token: write      # required for OIDC federation
   contents: read       # required to checkout the repo

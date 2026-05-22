@@ -45,3 +45,9 @@ variable "nsgs" {
     }))
   }))
 }
+
+variable "nsg_ids" {
+  description = "Map of subnet names to NSG IDs to associate. Optional — subnets without an entry get no NSG."
+  type        = map(string)
+  default     = {}
+}

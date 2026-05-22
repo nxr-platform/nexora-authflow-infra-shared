@@ -76,8 +76,8 @@ jobs:
       - name: TFLint
         id: tflint
         run: |
-          tflint --init
-          tflint --no-color
+         tflint --init
+         tflint --no-color --minimum-failure-severity=error
 
       - name: Terraform Plan
         id: plan
@@ -188,8 +188,8 @@ jobs:
       - name: TFLint
         id: tflint
         run: |
-          tflint --init
-          tflint --no-color
+         tflint --init
+         tflint --no-color --minimum-failure-severity=error
 
       - name: Terraform Plan
         id: plan

@@ -42,11 +42,11 @@ jobs:
             directory: global/
             framework: terraform
             output_format: sarif
-            output_file_path: checkov- global-results.sarif
+            output_file_path: checkov-global-results.sarif
             soft_fail: false # fail the action if any issues are found
             
       - name: Upload Checkov Global SARIF to GitHub Security Tab
-        uses: github/codeql-action/upload-sarif@v3
+        uses: github/codeql-action/upload-sarif@v4
         if: always() # ensure this runs even if Checkov finds issues
         with:
           sarif_file: checkov-global-results.sarif
@@ -62,7 +62,7 @@ jobs:
             soft_fail: false # fail the action if any issues are found
 
       - name: Upload Checkov Shared SARIF to GitHub Security Tab
-        uses: github/codeql-action/upload-sarif@v3
+        uses: github/codeql-action/upload-sarif@v4
         if: always() # ensure this runs even if Checkov finds issues
         with:
           sarif_file: checkov-shared-results.sarif

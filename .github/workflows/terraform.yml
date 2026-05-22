@@ -4,20 +4,69 @@ on:
   push:
     branches:
       - main
+    paths:
+    - 'global/**'
+    - 'shared/**'
   pull_request:
     branches:
       - main
+    paths:
+    - 'global/**'
+    - 'shared/**'
 
 permissions:
   id-token: write      # required for OIDC federation
   contents: read       # required to checkout the repo
   pull-requests: write # required to post plan output as PR comment
+  security-events: write # required for SARIF upload
 
 env:
   TF_VERSION: "1.15.2"
   TFLINT_VERSION: "v0.50.3"
 
 jobs:
+  # SECURITY SCANNING
+  security:
+    name: "Security Scanning — Checkov"
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run Checkov - Global
+        uses: bridgecrewio/checkov-action@v12
+        with:
+            directory: global/
+            framework: terraform
+            output_format: sarif
+            output_file_path: checkov- global-results.sarif
+            soft_fail: false # fail the action if any issues are found
+            
+      - name: Upload Checkov Global SARIF to GitHub Security Tab
+        uses: github/codeql-action/upload-sarif@v2
+        if: always() # ensure this runs even if Checkov finds issues
+        with:
+          sarif_file: checkov-global-results.sarif
+          category: "Terraform Security Scan - Global Layer"
+
+      - name: Run Checkov - Shared
+        uses: bridgecrewio/checkov-action@v12
+        with:
+            directory: shared/
+            framework: terraform
+            output_format: sarif
+            output_file_path: checkov-shared-results.sarif
+            soft_fail: false # fail the action if any issues are found
+
+      - name: Upload Checkov Shared SARIF to GitHub Security Tab
+        uses: github/codeql-action/upload-sarif@v2
+        if: always() # ensure this runs even if Checkov finds issues
+        with:
+          sarif_file: checkov-shared-results.sarif
+          category: "Terraform Security Scan - Shared Layer"
+
   # GLOBAL LAYER
   global:
     name: "Global — Front Door, ACR, DNS"

@@ -21,11 +21,12 @@ module "network" {
 }
 
 module "subnet" {
-  source = "git::https://github.com/nxr-platform/nexora-authflow-terraform-modules.git//modules/subnet?ref=v0.3.0"
+  source = "git::https://github.com/nxr-platform/nexora-authflow-terraform-modules.git//modules/subnet?ref=v0.3.2"
 
   resource_group_name = module.resource_group.name
   vnet_name           = module.network.name
   subnets             = var.subnets
+  nsg_ids             = module.nsg.nsg_ids
   tags                = local.common_tags
 }
 
@@ -35,15 +36,5 @@ module "nsg" {
   resource_group_name = module.resource_group.name
   location            = var.location
   nsgs                = var.nsgs
-  tags                = local.common_tags
-}
-
-module "subnets" {
-  source = "git::https://github.com/nxr-platform/nexora-authflow-terraform-modules.git//modules/subnet?ref=v0.3.2"
-
-  resource_group_name = module.resource_group.name
-  vnet_name           = module.network.name
-  subnets             = var.subnets
-  nsg_ids             = module.nsg.nsg_ids
   tags                = local.common_tags
 }

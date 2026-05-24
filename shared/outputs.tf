@@ -37,3 +37,8 @@ output "nsg_ids" {
   description = "Map of NSG names to NSG IDs"
   value       = module.nsg.nsg_ids
 }
+
+output "route_table_ids" {
+  description = "Map of route table names to route table IDs"
+  value       = module.route-table.route_table_ids
+}

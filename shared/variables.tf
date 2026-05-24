@@ -56,10 +56,10 @@ variable "route_tables" {
   description = "Map of route tables to create with their routes"
   type = map(object({
     routes = list(object({
-      name                       = string
-      address_prefix             = string
-      next_hop_type              = string
-      next_hop_in_ip_address    = optional(string)
+      name                   = string
+      address_prefix         = string
+      next_hop_type          = string
+      next_hop_in_ip_address = optional(string)
     }))
   }))
 }

@@ -94,7 +94,6 @@ jobs:
       - name: Terraform Format Check
         id: fmt
         run: terraform fmt -check -recursive
-        continue-on-error: true
 
       - name: Azure Login
         uses: azure/login@v2
@@ -206,7 +205,7 @@ jobs:
       - name: Terraform Format Check
         id: fmt
         run: terraform fmt -check -recursive
-        continue-on-error: true
+        
 
       - name: Azure Login
         uses: azure/login@v2

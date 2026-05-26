@@ -64,3 +64,9 @@ variable "route_tables" {
   }))
 }
 
+variable "dns_zones" {
+  description = "Map of private DNS zones to create and link to the shared VNet"
+  type = map(object({
+    tags = optional(map(string), {})
+  }))
+}

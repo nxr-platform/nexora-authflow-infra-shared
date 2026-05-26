@@ -48,3 +48,12 @@ module "route-table" {
   route_tables        = var.route_tables
   tags                = local.common_tags
 }
+
+module "private-dns" {
+  source = "git::https://github.com/nxr-platform/nexora-authflow-terraform-modules.git//modules/private-dns?ref=v0.6.0"
+
+  resource_group_name = module.resource_group.name
+  dns_zones           = var.dns_zones
+  vnet_id             = module.network.id
+  tags                = local.common_tags
+}

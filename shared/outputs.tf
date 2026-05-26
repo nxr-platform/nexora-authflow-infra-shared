@@ -42,3 +42,13 @@ output "route_table_ids" {
   description = "Map of route table names to route table IDs"
   value       = module.route-table.route_table_ids
 }
+
+output "dns_zone_ids" {
+  description = "Map of private DNS zone names to IDs"
+  value       = module.private-dns.dns_zone_ids
+}
+
+output "dns_zone_names" {
+  description = "Map of private DNS zone names"
+  value       = module.private-dns.dns_zone_names
+}

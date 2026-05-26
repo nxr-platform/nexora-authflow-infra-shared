@@ -165,3 +165,12 @@ route_tables = {
     ]
   }
 }
+
+
+dns_zones = {
+  "privatelink.vaultcore.azure.net"         = {}
+  "privatelink.azurecr.io"                  = {}
+  "privatelink.servicebus.windows.net"      = {}
+  "privatelink.postgres.database.azure.com" = {}
+  "privatelink.redis.cache.windows.net"     = {}
+}

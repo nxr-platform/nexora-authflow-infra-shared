@@ -30,7 +30,7 @@ variable "acr_admin_enabled" {
 variable "acr_public_network_access_enabled" {
   description = "Whether to enable public network access to the Container Registry"
   type        = bool
-  default     = false
+  default     = true
 }
 
 variable "acr_georeplications" {
